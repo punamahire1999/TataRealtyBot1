@@ -1,524 +1,138 @@
-{#<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">#}
-{#<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>#}
-{#<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>#}
-{##}
-{#<!DOCTYPE html>#}
-{#<html>#}
-{#	<head>#}
-{#		<title>Chatbot</title>#}
-{#		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">#}
-{#		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">#}
-{#		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>#}
-{#		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css')}}"/>#}
-{#	</head>#}
-{##}
-{##}
-{#	<body>#}
-{#		<div class="container-fluid h-100">#}
-{#			<div class="row justify-content-center h-100">#}
-{#				<div class="col-md-8 col-xl-6 chat">#}
-{#					<div class="card">#}
-{#						<div class="card-header msg_head">#}
-{#							<div class="d-flex bd-highlight">#}
-{#								<div class="img_cont">#}
-{#									<img src="https://i.ibb.co/fSNP7Rz/icons8-chatgpt-512.png" class="rounded-circle user_img">#}
-{#									<span class="online_icon"></span>#}
-{#								</div>#}
-{#								<div class="user_info">#}
-{#									<span>ChatBot</span>#}
-{#									<p>Ask me anything!</p>#}
-{#								</div>#}
-{#							</div>#}
-{#						</div>#}
-{#						<div id="messageFormeight" class="card-body msg_card_body">#}
-{##}
-{##}
-{#						</div>#}
-{#						<div class="card-footer">#}
-{#							<form id="messageArea" class="input-group">#}
-{#                                <input type="text" id="text" name="msg" placeholder="Type your message..." autocomplete="off" class="form-control type_msg" required/>#}
-{#								<div class="input-group-append">#}
-{#									<button type="submit" id="send" class="input-group-text send_btn"><i class="fas fa-location-arrow"></i></button>#}
-{#								</div>#}
-{#							</form>#}
-{#						</div>#}
-{#					</div>#}
-{#				</div>#}
-{#			</div>#}
-{#		</div>#}
-{##}
-{#		<script>#}
-{#			$(document).ready(function() {#}
-{#				$("#messageArea").on("submit", function(event) {#}
-{#					const date = new Date();#}
-{#					const hour = date.getHours();#}
-{#					const minute = date.getMinutes();#}
-{#					const str_time = hour+":"+minute;#}
-{#					var rawText = $("#text").val();#}
-{##}
-{#					var userHtml = '<div class="d-flex justify-content-end mb-4"><div class="msg_cotainer_send">' + rawText + '<span class="msg_time_send">'+ str_time + '</span></div><div class="img_cont_msg"><img src="https://i.ibb.co/d5b84Xw/Untitled-design.png" class="rounded-circle user_img_msg"></div></div>';#}
-{##}
-{#					$("#text").val("");#}
-{#					$("#messageFormeight").append(userHtml);#}
-{##}
-{#					$.ajax({#}
-{#						data: {#}
-{#							msg: rawText,#}
-{#						},#}
-{#						type: "POST",#}
-{#						url: "/get",#}
-{#					}).done(function(data) {#}
-{#						var botHtml = '<div class="d-flex justify-content-start mb-4"><div class="img_cont_msg"><img src="https://i.ibb.co/fSNP7Rz/icons8-chatgpt-512.png" class="rounded-circle user_img_msg"></div><div class="msg_cotainer">' + data + '<span class="msg_time">' + str_time + '</span></div></div>';#}
-{#						$("#messageFormeight").append($.parseHTML(botHtml));#}
-{#					});#}
-{#					event.preventDefault();#}
-{#				});#}
-{#			});#}
-{#		</script>#}
-{##}
-{#    </body>#}
-{#</html>#}
-
-
-{# @nd working code
-
-{#<!DOCTYPE html>#}
-{#<html>#}
-{#<head>#}
-{#    <title>Chatbot</title>#}
-{#    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">#}
-{#    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">#}
-{#    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>#}
-{#</head>#}
-{#<body>#}
-{#    <div class="container-fluid h-100">#}
-{#        <div class="row justify-content-center h-100">#}
-{#            <div class="col-md-8 col-xl-6 chat">#}
-{#                <div class="card">#}
-{#                    <div class="card-header msg_head">#}
-{#                        <div class="d-flex bd-highlight">#}
-{#                            <div class="img_cont">#}
-{#                                <img src="https://i.ibb.co/fSNP7Rz/icons8-chatgpt-512.png" class="rounded-circle user_img">#}
-{#                                <span class="online_icon"></span>#}
-{#                            </div>#}
-{#                            <div class="user_info">#}
-{#                                <span>ChatBot</span>#}
-{#                                <p>Ask me anything!</p>#}
-{#                            </div>#}
-{#                        </div>#}
-{#                    </div>#}
-{#                    <div id="messageFormeight" class="card-body msg_card_body"></div>#}
-{#                    <div class="card-footer">#}
-{#                        <form id="messageArea" class="input-group">#}
-{#                            <input type="text" id="text" name="msg" placeholder="Type your message..." autocomplete="off" class="form-control type_msg" required/>#}
-{#                            <div class="input-group-append">#}
-{#                                <button type="submit" id="send" class="input-group-text send_btn"><i class="fas fa-location-arrow"></i></button>#}
-{#                            </div>#}
-{#                        </form>#}
-{#                    </div>#}
-{#                </div>#}
-{#            </div>#}
-{#        </div>#}
-{#    </div>#}
-{##}
-{#    <script>#}
-{#        $(document).ready(function() {#}
-{#            $("#messageArea").on("submit", function(event) {#}
-{#                event.preventDefault();#}
-{#                const date = new Date();#}
-{#                const hour = date.getHours();#}
-{#                const minute = date.getMinutes();#}
-{#                const str_time = hour + ":" + minute;#}
-{#                const rawText = $("#text").val();#}
-{##}
-{#                const userHtml = `<div class="d-flex justify-content-end mb-4">#}
-{#                                    <div class="msg_cotainer_send">${rawText}<span class="msg_time_send">${str_time}</span></div>#}
-{#                                    <div class="img_cont_msg">#}
-{#                                        <img src="https://i.ibb.co/d5b84Xw/Untitled-design.png" class="rounded-circle user_img_msg">#}
-{#                                    </div>#}
-{#                                  </div>`;#}
-{##}
-{#                $("#text").val("");#}
-{#                $("#messageFormeight").append(userHtml);#}
-{##}
-{#                $.ajax({#}
-{#                    data: { msg: rawText },#}
-{#                    type: "POST",#}
-{#                    url: "/get"#}
-{#                }).done(function(data) {#}
-{#                    const botHtml = `<div class="d-flex justify-content-start mb-4">#}
-{#                                        <div class="img_cont_msg">#}
-{#                                            <img src="https://i.ibb.co/fSNP7Rz/icons8-chatgpt-512.png" class="rounded-circle user_img_msg">#}
-{#                                        </div>#}
-{#                                        <div class="msg_cotainer">${data.response}<span class="msg_time">${str_time}</span></div>#}
-{#                                     </div>`;#}
-{#                    $("#messageFormeight").append($.parseHTML(botHtml));#}
-{#                });#}
-{#            });#}
-{#        });#}
-{#    </script>#}
-{#</body>#}
-{#</html>#}
-
-{# very nice working code withaout bg/#}
-{#<!DOCTYPE html>#}
-{#<html>#}
-{#<head>#}
-{#    <title>Chatbot</title>#}
-{#    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">#}
-{#    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">#}
-{#    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>#}
-{#    <style>#}
-{#        body {#}
-{#            font-family: Arial, sans-serif;#}
-{#            background: #f5f5f5;#}
-{#        }#}
-{#        .chatbot-container {#}
-{#            position: fixed;#}
-{#            bottom: 30px;#}
-{#            right: 30px;#}
-{#            z-index: 1000;#}
-{#        }#}
-{#        .chatbot-button {#}
-{#            background: #007bff;#}
-{#            border: none;#}
-{#            border-radius: 50%;#}
-{#            width: 60px;#}
-{#            height: 60px;#}
-{#            color: white;#}
-{#            font-size: 24px;#}
-{#            cursor: pointer;#}
-{#            display: flex;#}
-{#            align-items: center;#}
-{#            justify-content: center;#}
-{#        }#}
-{#        .chatbot-window {#}
-{#            display: none;#}
-{#            background: white;#}
-{#            border-radius: 10px;#}
-{#            box-shadow: 0 4px 8px rgba(0,0,0,0.2);#}
-{#            width: 350px;#}
-{#            max-width: 100%;#}
-{#            position: relative;#}
-{#        }#}
-{#        .chatbot-header {#}
-{#            background: #007bff;#}
-{#            color: white;#}
-{#            padding: 10px;#}
-{#            border-top-left-radius: 10px;#}
-{#            border-top-right-radius: 10px;#}
-{#            display: flex;#}
-{#            align-items: center;#}
-{#            justify-content: space-between;#}
-{#        }#}
-{#        .chatbot-header img {#}
-{#            width: 40px;#}
-{#            height: 40px;#}
-{#            border-radius: 50%;#}
-{#        }#}
-{#        .chatbot-header .close-button {#}
-{#            background: none;#}
-{#            border: none;#}
-{#            color: white;#}
-{#            font-size: 20px;#}
-{#            cursor: pointer;#}
-{#        }#}
-{#        .chatbot-body {#}
-{#            max-height: 400px;#}
-{#            overflow-y: auto;#}
-{#            padding: 10px;#}
-{#        }#}
-{#        .chatbot-footer {#}
-{#            padding: 10px;#}
-{#            border-top: 1px solid #ddd;#}
-{#        }#}
-{#        .msg_cotainer, .msg_cotainer_send {#}
-{#            background: #f1f1f1;#}
-{#            border-radius: 20px;#}
-{#            padding: 10px;#}
-{#            margin: 5px;#}
-{#            max-width: 75%;#}
-{#            word-wrap: break-word;#}
-{#        }#}
-{#        .msg_cotainer_send {#}
-{#            background: #007bff;#}
-{#            color: white;#}
-{#            align-self: flex-end;#}
-{#        }#}
-{#        .msg_time, .msg_time_send {#}
-{#            font-size: 10px;#}
-{#            margin-top: 5px;#}
-{#            color: gray;#}
-{#        }#}
-{#        .input-group .form-control {#}
-{#            border-radius: 20px;#}
-{#        }#}
-{#        .input-group .send_btn {#}
-{#            border-radius: 20px;#}
-{#            background: #007bff;#}
-{#            color: white;#}
-{#            border: none;#}
-{#        }#}
-{#    </style>#}
-{#</head>#}
-{#<body>#}
-{#    <div class="chatbot-container">#}
-{#        <button class="chatbot-button">#}
-{#            <i class="fas fa-comments"></i>#}
-{#        </button>#}
-{#        <div class="chatbot-window">#}
-{#            <div class="chatbot-header">#}
-{#                <div>#}
-{#                    <img src="https://i.ibb.co/fSNP7Rz/icons8-chatgpt-512.png" alt="Chatbot">#}
-{#                    <span>TATA REALTY ChatBot</span>#}
-{#                </div>#}
-{#                <button class="close-button">&times;</button>#}
-{#            </div>#}
-{#            <div id="messageFormeight" class="chatbot-body"></div>#}
-{#            <div class="chatbot-footer">#}
-{#                <form id="messageArea" class="input-group">#}
-{#                    <input type="text" id="text" name="msg" placeholder="Type your message..." autocomplete="off" class="form-control type_msg" required/>#}
-{#                    <div class="input-group-append">#}
-{#                        <button type="submit" id="send" class="input-group-text send_btn"><i class="fas fa-location-arrow"></i></button>#}
-{#                    </div>#}
-{#                </form>#}
-{#            </div>#}
-{#        </div>#}
-{#    </div>#}
-{##}
-{#    <script>#}
-{#        $(document).ready(function() {#}
-{#            $(".chatbot-button").on("click", function() {#}
-{#                $(".chatbot-window").toggle(); // Toggle the visibility of the chat#}
-{#            });#}
-{#            $(".close-button").on("click", function() {#}
-{#                $(".chatbot-window").hide(); // Hide the chat window#}
-{#            });#}
-{##}
-{#            $("#messageArea").on("submit", function(event) {#}
-{#                event.preventDefault();#}
-{#                const date = new Date();#}
-{#                const hour = date.getHours();#}
-{#                const minute = date.getMinutes();#}
-{#                const str_time = hour + ":" + (minute < 10 ? '0' : '') + minute;#}
-{#                const rawText = $("#text").val();#}
-{##}
-{#                const userHtml = `<div class="d-flex justify-content-end mb-4">#}
-{#                                    <div class="msg_cotainer_send">${rawText}<span class="msg_time_send">${str_time}</span></div>#}
-{#                                  </div>`;#}
-{##}
-{#                $("#text").val("");#}
-{#                $("#messageFormeight").append(userHtml);#}
-{##}
-{#                $.ajax({#}
-{#                    data: { msg: rawText },#}
-{#                    type: "POST",#}
-{#                    url: "/get"#}
-{#                }).done(function(data) {#}
-{#                    const botHtml = `<div class="d-flex justify-content-start mb-4">#}
-{#                                        <div class="msg_cotainer">${data.response}<span class="msg_time">${str_time}</span></div>#}
-{#                                     </div>`;#}
-{#                    $("#messageFormeight").append($.parseHTML(botHtml));#}
-{#                    $("#messageFormeight").scrollTop($("#messageFormeight")[0].scrollHeight);#}
-{#                });#}
-{#            });#}
-{#        });#}
-{#    </script>#}
-{#</body>#}
-{#</html>#}
-
-{#2nd version#}
-{#<!DOCTYPE html>#}
-{#<html>#}
-{#<head>#}
-{#    <title>Chatbot</title>#}
-{#    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">#}
-{#    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">#}
-{#    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>#}
-{#    <style>#}
-{#        body {#}
-{#            font-family: Arial, sans-serif;#}
-{#            background: #f5f5f5;#}
-{#        }#}
-{#        .header-bar {#}
-{#    align-items: center !important;#}
-{#}#}
-{##}
-{#        .header-bar {#}
-{#    -webkit-box-align: center !important;#}
-{#    -webkit-align-items: center !important;#}
-{#    -ms-flex-align: center !important;#}
-{#    align-items: center !important;#}
-{#}#}
-{#        .chatbot-container {#}
-{#            position: fixed;#}
-{#            bottom: 30px;#}
-{#            right: 30px;#}
-{#            z-index: 1000;#}
-{#        }#}
-{#        .chatbot-button {#}
-{#            background: #007bff;#}
-{#            border: none;#}
-{#            border-radius: 50%;#}
-{#            width: 60px;#}
-{#            height: 60px;#}
-{#            color: white;#}
-{#            font-size: 24px;#}
-{#            cursor: pointer;#}
-{#            display: flex;#}
-{#            align-items: center;#}
-{#            justify-content: center;#}
-{#        }#}
-{#        .chatbot-window {#}
-{#            display: none;#}
-{#            background: white;#}
-{#            border-radius: 10px;#}
-{#            box-shadow: 0 4px 8px rgba(0,0,0,0.2);#}
-{#            width: 350px;#}
-{#            max-width: 100%;#}
-{#            position: relative;#}
-{#        }#}
-{#        .chatbot-header {#}
-{#            background: #007bff;#}
-{#            color: white;#}
-{#            padding: 10px;#}
-{#            border-top-left-radius: 10px;#}
-{#            border-top-right-radius: 10px;#}
-{#            display: flex;#}
-{#            align-items: center;#}
-{#            justify-content: space-between;#}
-{#        }#}
-{#        .chatbot-header img {#}
-{#            width: 40px;#}
-{#            height: 40px;#}
-{#            border-radius: 50%;#}
-{#        }#}
-{#        .chatbot-header .close-button {#}
-{#            background: none;#}
-{#            border: none;#}
-{#            color: white;#}
-{#            font-size: 20px;#}
-{#            cursor: pointer;#}
-{#        }#}
-{#        .chatbot-body {#}
-{#            max-height: 400px;#}
-{#            overflow-y: auto;#}
-{#            padding: 10px;#}
-{#        }#}
-{#        .chatbot-footer {#}
-{#            padding: 10px;#}
-{#            border-top: 1px solid #ddd;#}
-{#        }#}
-{#        .msg_cotainer, .msg_cotainer_send {#}
-{#            background: #f1f1f1;#}
-{#            border-radius: 20px;#}
-{#            padding: 10px;#}
-{#            margin: 5px;#}
-{#            max-width: 75%;#}
-{#            word-wrap: break-word;#}
-{#        }#}
-{#        .msg_cotainer_send {#}
-{#            background: #007bff;#}
-{#            color: white;#}
-{#            align-self: flex-end;#}
-{#        }#}
-{#        .msg_time, .msg_time_send {#}
-{#            font-size: 10px;#}
-{#            margin-top: 5px;#}
-{#            color: gray;#}
-{#        }#}
-{#        .input-group .form-control {#}
-{#            border-radius: 20px;#}
-{#        }#}
-{#        .input-group .send_btn {#}
-{#            border-radius: 20px;#}
-{#            background: #007bff;#}
-{#            color: white;#}
-{#            border: none;#}
-{#        }#}
-{#    </style>#}
-{#</head>#}
-{#<body>#}
-{##}
-{#<div class="background">#}
-{#    <div ><div class="header-bar"><a href="" class="logo"><img loading="lazy" class="logo--img block-img-responsive" src="https://tatarealty.in/assets/images/tril-logo_white.png" alt="Tata Realty logo" title="Tata Realty logo"></a><!--<div class="header-right no-num"><button aria-label="Search" class="button fa fa-search btn-header-search"></button>--><div class="menu-logo"><button aria-label="Menu" id="btn-menu-open" class="button btn-menu"><span class="btn-menu-lines"><span class="btn-menu--line"></span><span class="btn-menu--line"></span><span class="btn-menu--line"></span></span><span class="btn-menu-text">Menu</span></button><a href="https://www.tata.com/" target="_blank"><img src="https://tatarealty.in/assets/images/tata_insignia_logo.svg" alt="Tata Insignia" srcset=""></a></div></div></div>#}
-{#    <div class="chatbot-container">#}
-{#        <button class="chatbot-button">#}
-{#            <i class="fas fa-comments"></i>#}
-{#        </button>#}
-{#        <div class="chatbot-window">#}
-{#            <div class="chatbot-header">#}
-{#                <div>#}
-{#                    <img src="https://i.ibb.co/fSNP7Rz/icons8-chatgpt-512.png" alt="Chatbot">#}
-{#                    <span>TATA REALTY BOT</span>#}
-{#                </div>#}
-{#                <button class="close-button">&times;</button>#}
-{#            </div>#}
-{#            <div id="messageFormeight" class="chatbot-body"></div>#}
-{#            <div class="chatbot-footer">#}
-{#                <form id="messageArea" class="input-group">#}
-{#                    <input type="text" id="text" name="msg" placeholder="Type your message..." autocomplete="off" class="form-control type_msg" required/>#}
-{#                    <div class="input-group-append">#}
-{#                        <button type="submit" id="send" class="input-group-text send_btn"><i class="fas fa-location-arrow"></i></button>#}
-{#                    </div>#}
-{#                </form>#}
-{#            </div>#}
-{#        </div>#}
-{#    </div>#}
-{#</div>#}
-{#    <script>#}
-{#        $(document).ready(function() {#}
-{#            $(".chatbot-button").on("click", function() {#}
-{#                $(".chatbot-window").toggle(); // Toggle the visibility of the chat#}
-{#            });#}
-{#            $(".close-button").on("click", function() {#}
-{#                $(".chatbot-window").hide(); // Hide the chat window#}
-{#            });#}
-{##}
-{#            $("#messageArea").on("submit", function(event) {#}
-{#                event.preventDefault();#}
-{#                const date = new Date();#}
-{#                const hour = date.getHours();#}
-{#                const minute = date.getMinutes();#}
-{#                const str_time = hour + ":" + (minute < 10 ? '0' : '') + minute;#}
-{#                const rawText = $("#text").val();#}
-{##}
-{#                const userHtml = `<div class="d-flex justify-content-end mb-4">#}
-{#                                    <div class="msg_cotainer_send">${rawText}<span class="msg_time_send">${str_time}</span></div>#}
-{#                                  </div>`;#}
-{##}
-{#                $("#text").val("");#}
-{#                $("#messageFormeight").append(userHtml);#}
-{##}
-{#                $.ajax({#}
-{#                    data: { msg: rawText },#}
-{#                    type: "POST",#}
-{#                    url: "/get"#}
-{#                }).done(function(data) {#}
-{#                    const botHtml = `<div class="d-flex justify-content-start mb-4">#}
-{#                                        <div class="msg_cotainer">${data.response}<span class="msg_time">${str_time}</span></div>#}
-{#                                     </div>`;#}
-{#                    $("#messageFormeight").append($.parseHTML(botHtml));#}
-{#                    $("#messageFormeight").scrollTop($("#messageFormeight")[0].scrollHeight);#}
-{#                });#}
-{#            });#}
-{#        });#}
-{#    </script>#}
-{#</body>#}
-{#</html>#}
-
-
 
 <!DOCTYPE html>
 <html>
 <head>
     <title>Chatbot</title>
     <meta charset="UTF-8">
-{#    <link rel="stylesheet" href="../static/style.css">#}
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <style>
+
+        {#back css#}
+
+    body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+}
+
+header {
+    position: relative;
+    text-align: center;
+    color: white;
+}
+
+nav {
+    background: rgba(0, 0, 0, 0.8);
+    padding: 10px 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+}
+
+nav ul li {
+    margin: 0 20px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+}
+
+.header-content {
+    margin-top: 50px;
+}
+
+.header-img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    filter: brightness(0.5);
+}
+
+ .slider {
+            overflow: hidden;
+            position: relative;
+        }
+
+        .slider-container {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+            width: 500%;
+        }
+.slide img {
+    width: 100%;
+    height: 70%;
+    object-fit: cover;
+}
+.slide {
+    width: 100%;
+}
+.about-company {
+    padding: 20px;
+    text-align: center;
+    background-color: white;
+    margin: 20px;
+}
+
+footer {
+    text-align: center;
+    padding: 10px;
+    background-color: #333;
+    color: white;
+    position: relative;
+}
+
+.contact-form {
+    background-color: white;
+    padding: 20px;
+    margin: 20px;
+    border-radius: 10px;
+}
+
+.contact-form form {
+    display: flex;
+    flex-direction: column;
+}
+
+.contact-form label {
+    margin-top: 10px;
+}
+
+.contact-form input, .contact-form textarea {
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.contact-form button {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.contact-form button:hover {
+    background-color: #555;
+}
+
+{# back css#}
+
         .body {
             font-family: Arial, sans-serif;
             background: #f5f5f5;
@@ -650,13 +264,95 @@
         .suggestion-item:hover {
             background-color: #f0f0f0;
         }
+
+
+        {##}
+        /* Styles for the suggestion container */
+.suggestions-container {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+/* Styles for each suggestion item */
+.suggestion-item {
+    padding: 8px 16px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+/* Hover effect for suggestion items */
+.suggestion-item:hover {
+    background-color: #f0f0f0;
+}
+
     </style>
 
 </head>
 <body>
     <div class="background">
 
+        <header>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+{#        <div class="header-content">#}
+{#             <img src="{{ url_for('static', filename='images/about.png') }}" alt="Example Image">#}
+{#        </div>#}
+    </header>
+
+    <section id="home" class="slider">
+        <div class="slider-container">
+            <div class="slide"> <img src="{{ url_for('static', filename='images/slider1.png') }}" alt="Slider1 Image"></div>
+            <div class="slide"> <img src="{{ url_for('static', filename='images/slider2.png') }}" alt="Slider2 Image"></div>
+            <div class="slide"> <img src="{{ url_for('static', filename='images/slider3.png') }}" alt="Slider3 Image"></div>
+            <div class="slide"> <img src="{{ url_for('static', filename='images/slider4.png') }}" alt="Slider3 Image"></div>
+            <div class="slide"> <img src="{{ url_for('static', filename='images/slider5.png') }}" alt="Slider3 Image"></div>
+
+
+        </div>
+    </section>
+
+    <section id="about" class="about-company">
+        <h2>About Tata Realty and Infrastructure Ltd</h2>
+        <p>A 100 percent subsidiary of Tata Sons Pvt Ltd, founded by the great visionary Jamsetji Nusserwanji, was established in 2007. Tata Realty and Infrastructure Limited continues to build on this strong foundation and legacy of TATA. The Company is in the business of developing commercial real estate.</p>
+        <p>Intellion is the exclusive office spaces vertical of Tata Realty and Infrastructure Ltd.</p>
+    </section>
+
+    <footer id="contact">
+        <div class="contact-form">
+            <h3>Contact Us</h3>
+            <form>
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="message">Message</label>
+                <textarea id="message" name="message" required></textarea>
+
+                <button type="submit">Send</button>
+            </form>
+        </div>
+        <p>&copy; 2024 Company Name. All rights reserved.</p>
+    </footer>
+
+
+
     </div>
+
     <div class="chatbot-container">
         <button class="chatbot-button">
             <i class="fas fa-comments"></i>
@@ -677,20 +373,43 @@
                         <button type="submit" id="send" class="input-group-text send_btn"><i class="fas fa-location-arrow"></i></button>
                     </div>
                 </form>
+                 <!-- Auto-suggestions -->
+             <div id="suggestions" class="suggestions-container"></div>
+            </div>
+            <div class="chatbot-body">
+                <div id="messageFormeight"></div>
+                <!-- Suggestions dropdown -->
+                <div id="suggestions"></div>
             </div>
         </div>
     </div>
 
     <script>
         $(document).ready(function() {
+            let currentIndex = 0;
+            const myslides = $('.slider-container .slide');
+            const slideCount = myslides.length;
+            const slideWidth = myslides.width();
+
+            function showNextSlide() {
+                currentIndex = (currentIndex + 1) % slideCount;
+                $('.slider-container').css('transform', 'translateX(' + (-currentIndex * slideWidth) + 'px)');
+            }
+
+            setInterval(showNextSlide, 3000);
+
             $(".chatbot-button").on("click", function() {
                 $(".chatbot-window").toggle();
-                if ($(".chatbot-window").is(":visible")) {
+                const isChatWindowVisible = $(".chatbot-window").is(":visible");
+                if (isChatWindowVisible) {
+                    $(".chatbot-button").hide();
                     displayWelcomeMessage();
                 }
             });
+
             $(".close-button").on("click", function() {
                 $(".chatbot-window").hide();
+                $(".chatbot-button").show();
             });
 
             $("#messageArea").on("submit", function(event) {
@@ -735,6 +454,89 @@
                 $("#messageFormeight").append(botHtml);
             }
         });
+
+        $("#text").on("input", function() {
+                const userInput = $(this).val().toLowerCase();
+                const suggestions = getSuggestions(userInput);
+
+                displaySuggestions(suggestions);
+            });
+
+
+
+
+        {##}
+
+         // Extract keywords from qa_pairs
+    const qa_pairs_keywords = Object.keys(qa_pairs).map(question => question.toLowerCase().split(" ")).flat();
+
+    function displaySuggestions(suggestions) {
+        const suggestionHTML = suggestions.map(suggestion => `<div class="suggestion-item">${suggestion}</div>`).join('');
+        $("#suggestions").html(suggestionHTML);
+    }
+
+    $("#text").on("input", function() {
+        const userInput = $(this).val().toLowerCase();
+        const suggestions = [];
+
+        qa_pairs_keywords.forEach(keyword => {
+            if (userInput.includes(keyword)) {
+                Object.keys(qa_pairs).forEach(question => {
+                    if (question.toLowerCase().includes(keyword) && !suggestions.includes(question)) {
+                        suggestions.push(question);
+                    }
+                });
+            }
+        });
+
+        displaySuggestions(suggestions);
+    });
+
+    $(document).on('click', '.suggestion-item', function() {
+        const suggestionText = $(this).text();
+        $("#text").val(suggestionText);
+        $("#suggestions").html('');
+    });
+
+    $(document).on('click', '.suggestion-item', function() {
+    const suggestionText = $(this).text();
+    $("#text").val(suggestionText);
+    $("#suggestions").html('');
+    $("#messageArea").submit(); // Automatically submit the form on suggestion click
+});
+
+
+    function displaySuggestions(suggestions) {
+        const suggestionHTML = suggestions.map(suggestion => `<div class="suggestion-item">${suggestion}</div>`).join('');
+        $("#suggestions").html(suggestionHTML);
+    }
+
+    // Event handler for input change
+    $("#text").on("input", function() {
+        const userInput = $(this).val().toLowerCase();
+        const suggestions = [];
+
+        qa_pairs_keywords.forEach(keyword => {
+            if (userInput.includes(keyword)) {
+                Object.keys(qa_pairs).forEach(question => {
+                    if (question.toLowerCase().includes(keyword) && !suggestions.includes(question)) {
+                        suggestions.push(question);
+                    }
+                });
+            }
+        });
+
+        displaySuggestions(suggestions);
+    });
+
+    // Event handler for suggestion click
+    $(document).on('click', '.suggestion-item', function() {
+        const suggestionText = $(this).text();
+        $("#text").val(suggestionText);
+        $("#suggestions").html('');
+    });
+
+        {##}
     </script>
 </body>
 </html>
