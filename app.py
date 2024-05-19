@@ -121,6 +121,7 @@ def handle_click():
     return jsonify({'response': response})
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    # app.run(debug=True)  // Comment this while deploymet
+    # production command
     serve(app, host="0.0.0.0", port=5000)
 
