@@ -2,7 +2,9 @@
 from flask import Flask, request, jsonify, render_template
 import spacy
 import re
+from waitress import serve
 import difflib
+
 
 app = Flask(__name__)
 
@@ -120,5 +122,5 @@ def handle_click():
 
 if __name__ == "__main__":
     app.run(debug=True)
-
+    serve(app, host="0.0.0.0", port=5000)
 
