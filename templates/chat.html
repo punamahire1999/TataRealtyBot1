@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,7 +8,15 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <style>
 
-        {#back css#}
+        .navbar-custom {
+    background-color:   rgba(0, 0, 0, 0.02); /* Black with 50% transparency */
+    height: 110px; /* Increase the height as desired */
+  }
+
+  .navbar-custom .navbar-toggler-icon {
+    background-color: #fff; /* Color of the toggler icon */
+  }
+    {#back css#}
 
     body {
     margin: 0;
@@ -21,33 +28,6 @@ header {
     position: relative;
     text-align: center;
     color: white;
-}
-
-nav {
-    background: rgba(0, 0, 0, 0.8);
-    padding: 10px 0;
-    position: fixed;
-    width: 100%;
-    top: 0;
-    z-index: 1000;
-}
-
-nav ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    justify-content: center;
-}
-
-nav ul li {
-    margin: 0 20px;
-}
-
-nav ul li a {
-    text-decoration: none;
-    color: white;
-    font-weight: bold;
 }
 
 .header-content {
@@ -299,18 +279,21 @@ footer {
     <div class="background">
 
         <header>
-        <nav>
-            <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
-{#        <div class="header-content">#}
-{#             <img src="{{ url_for('static', filename='images/about.png') }}" alt="Example Image">#}
-{#        </div>#}
-    </header>
+
+            <div class="pos-f-t">
+  <div class="collapse" id="navbarToggleExternalContent">
+    <div class="bg-dark p-4">
+      <h4 class="text-white">Collapsed content</h4>
+      <span class="text-muted">Toggleable via the navbar brand.</span>
+    </div>
+  </div>
+  <nav class="navbar navbar-custom navbar-dark bg-dark">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  </nav>
+</div>
+        </header>
 
     <section id="home" class="slider">
         <div class="slider-container">
@@ -391,12 +374,12 @@ footer {
             const slideCount = myslides.length;
             const slideWidth = myslides.width();
 
-            function showNextSlide() {
-                currentIndex = (currentIndex + 1) % slideCount;
-                $('.slider-container').css('transform', 'translateX(' + (-currentIndex * slideWidth) + 'px)');
-            }
-
-            setInterval(showNextSlide, 3000);
+            {#function showNextSlide() {#}
+            {#    currentIndex = (currentIndex + 1) % slideCount;#}
+            {#    $('.slider-container').css('transform', 'translateX(' + (-currentIndex * slideWidth) + 'px)');#}
+            {#}#}
+            {##}
+            {#setInterval(showNextSlide, 3000);#}
 
             $(".chatbot-button").on("click", function() {
                 $(".chatbot-window").toggle();
