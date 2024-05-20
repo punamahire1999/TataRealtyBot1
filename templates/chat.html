@@ -8,19 +8,30 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <style>
 
-        .navbar-custom {
-    background-color:   rgba(0, 0, 0, 0.02); /* Black with 50% transparency */
-    height: 110px; /* Increase the height as desired */
-  }
 
-  .navbar-custom .navbar-toggler-icon {
-    background-color: #fff; /* Color of the toggler icon */
-  }
     {#back css#}
 
     body {
     margin: 0;
-    font-family: Arial, sans-serif;
+    font-family: Arial, sans-serif;header {
+    position: relative;
+    text-align: center;
+    color: white;
+}
+
+nav {
+    background-color: rgba(0, 0, 0, 0.3);
+    padding: 10px 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    height: 110px;
+    z-index: 1000;
+}
+
+.header-content {
+    margin-top: 50px;
+}
     background-color: #f4f4f4;
 }
 
@@ -59,6 +70,12 @@ header {
 .slide {
     width: 100%;
 }
+.logo {
+    width: 50px;
+    display: block;
+    margin-top: 30px;
+}
+
 .about-company {
     padding: 20px;
     text-align: center;
@@ -271,6 +288,36 @@ footer {
 .suggestion-item:hover {
     background-color: #f0f0f0;
 }
+.btn-menu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    padding: 0;
+}
+
+.btn-menu-lines {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 24px;
+}
+
+.btn-menu-line {
+    width: 35px;
+    height: 4px;
+    background-color: #333;
+    border-radius: 2px;
+}
+
+.btn-menu-text {
+    margin-top: 8px;
+    font-size: 16px;
+    color: #333;
+}
 
     </style>
 
@@ -279,20 +326,10 @@ footer {
     <div class="background">
 
         <header>
-
-            <div class="pos-f-t">
-  <div class="collapse" id="navbarToggleExternalContent">
-    <div class="bg-dark p-4">
-      <h4 class="text-white">Collapsed content</h4>
-      <span class="text-muted">Toggleable via the navbar brand.</span>
-    </div>
-  </div>
-  <nav class="navbar navbar-custom navbar-dark bg-dark">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-  </nav>
-</div>
+            <nav>
+                <div class="logo"><img src="{{ url_for('static', filename='images/logo_white.png') }}" alt="logo Image"></div>
+                <div> <img src="{{ url_for('static', filename='images/tata-logo.png') }}" alt="tata-logo Image"></div>
+            </nav>
         </header>
 
     <section id="home" class="slider">
@@ -374,12 +411,12 @@ footer {
             const slideCount = myslides.length;
             const slideWidth = myslides.width();
 
-            {#function showNextSlide() {#}
-            {#    currentIndex = (currentIndex + 1) % slideCount;#}
-            {#    $('.slider-container').css('transform', 'translateX(' + (-currentIndex * slideWidth) + 'px)');#}
-            {#}#}
-            {##}
-            {#setInterval(showNextSlide, 3000);#}
+            {#  function showNextSlide() {
+                currentIndex = (currentIndex + 1) % slideCount;
+                $('.slider-container').css('transform', 'translateX(' + (-currentIndex * slideWidth) + 'px)');
+            }
+
+            setInterval(showNextSlide, 3000); #}
 
             $(".chatbot-button").on("click", function() {
                 $(".chatbot-window").toggle();
