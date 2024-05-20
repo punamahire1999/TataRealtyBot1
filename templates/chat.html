@@ -18,12 +18,12 @@
 }
 
 nav {
+    height: 90px;
     background-color: rgba(0, 0, 0, 0.3);
     padding: 10px 30px;
     position: fixed;
     width: 100%;
     top: 0;
-    height: 110px;
     z-index: 1000;
     display: flex;
     justify-content: space-between;
@@ -318,11 +318,10 @@ footer {
 }
 .tata-logo {
      background-color: transparent;
-    height: 70px;
-    width: 70px;
+    height: 60px;
+    width: 60px;
     padding-left: 0px;
     letter-spacing: 100px;
-    display: flex;
     align-items: center;
 }
 
@@ -375,7 +374,7 @@ footer {
             <div class="chatbot-header">
                 <div>
                     <img src="{{ url_for('static', filename='images/botimage.png') }}" class="tata-logo" alt="logo Image">
-                    <span>TATA REALTY BOT</span>
+                    <span style="font-size: large;padding-left: 20px; font-weight: bold">REVA</span>
                 </div>
                 <button class="close-button">&times;</button>
             </div>
@@ -392,8 +391,6 @@ footer {
             </div>
             <div class="chatbot-body">
                 <div id="messageFormeight"></div>
-                <!-- Suggestions dropdown -->
-                <div id="suggestions"></div>
             </div>
         </div>
     </div>
@@ -426,6 +423,8 @@ footer {
                 $(".chatbot-window").hide();
                 $(".chatbot-button").show();
                 $(".chatbot-text").show();
+                $("#messageFormeight").empty();
+
             });
 
             $("#messageArea").on("submit", function(event) {
@@ -461,7 +460,7 @@ footer {
                 const hour = date.getHours();
                 const minute = date.getMinutes();
                 const str_time = hour + ":" + (minute < 10 ? '0' : '') + minute;
-                const welcomeMessage = "Hello! 👋 I am BOT, TATA REALTY Responsive and Intelligent Assistant.";
+                const welcomeMessage = "Hello! 👋 I am Reva, TATA REALTY Responsive and Intelligent Assistant.";
 
                 const botHtml = `<div class="d-flex justify-content-start mb-4">
                                     <div class="msg_cotainer">${welcomeMessage}<span class="msg_time">${str_time}</span></div>
