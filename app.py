@@ -122,8 +122,8 @@ def handle_click():
 
 if __name__ == "__main__":
     # Comment this while deploymet
-    # app.run(debug=True)
+    app.run(debug=True)
 
     # production command
-    serve(app, host="0.0.0.0", port=5004)
+    # serve(app, host="0.0.0.0", port=5004)
 
