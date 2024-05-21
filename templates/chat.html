@@ -178,6 +178,7 @@ footer {
             max-width: 100%;
             position: relative;
             overflow: hidden;
+            max-height: 550px;
         }
         .chatbot-header {
             background: #007bff;
@@ -202,6 +203,7 @@ footer {
         }
         .chatbot-body {
             max-height: 400px;
+            {#max-height: calc(100% - 100px);#}
             overflow-y: auto;
             padding: 15px;
             background: #f9f9f9;
@@ -402,12 +404,12 @@ footer {
             const slideCount = myslides.length;
             const slideWidth = myslides.width();
 
-            {#  function showNextSlide() {
+            function showNextSlide() {
                 currentIndex = (currentIndex + 1) % slideCount;
                 $('.slider-container').css('transform', 'translateX(' + (-currentIndex * slideWidth) + 'px)');
             }
 
-            setInterval(showNextSlide, 3000); #}
+            setInterval(showNextSlide, 3000);
 
             $(".chatbot-button").on("click", function() {
                 $(".chatbot-window").toggle();
