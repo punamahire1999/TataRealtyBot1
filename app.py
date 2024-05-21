@@ -59,7 +59,7 @@ def format_suggestions(suggestions):
 
 def get_response(msg):
     # Preprocess the input message
-    processed_msg = preprocess_text(msg)
+    processed_msg = preprocess_text(msg).strip()
 
     # Check if the processed message is in the QA pairs or common responses
     if processed_msg in qa_pairs:
